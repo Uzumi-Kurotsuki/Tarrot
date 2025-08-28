@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khodam Finder</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin: 20px auto;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1.2rem;
+            margin: 10px;
+            width: calc(50% - 22px); /* Mengisi setengah layar dengan margin */
+            max-width: 300px; /* Batasan lebar */
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4757;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e84118;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cek Khodam</h1>
+    <div class="input-container">
+        <input type="text" id="userName" placeholder="Masukkan Nama Anda" />
+        <button onclick="findKhodam()">Cek</button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        const khodamList = [
+            "Roger Sumatera", "Ambalabu", "Ambatron", "PSHT", "Purbalnigga", "Sonic Sabar",
+            "Denis Dontol", "Charger Mito", "Sempak Keqing", "SDM Rendah", "Prabowo", "Anak Abah",
+            "Lebah Ganteng", "Gojo Pranowo", "Musang Birahi", "Karet Ban", "Spakbor Racing", "Knalpot",
+            "Kampas Kopling", "Ahmad Vario", "Predator Wanita", "Certified Pedofilia", "Petter Griffin",
+            "Ereksi Berat", "Korban Sodomi", "Pelecehan Seksual", "Cinta UPR", "Juara Onani", "Balmond JAWA",
+            "Naruto Dayak", "Pemuda Pancasila", "Penyepong Judi Online", "Vincent Berdua",
+            "Boboiboy Kelamin Ganda", "Biji Gatelan", "Muka Roblox", "Malas Ibadah", "Rusdy Lontong",
+            "Pembohong Publik", "Windah Subianto", "Kodok Pembesar", "Budi Arie Setiadi", "Gak Logis",
+            "Air Muwani", "Nguawor Rek", "Free Fire","Ketoprak Nafsu","Ewing Butek","Pantat Alucard","Pernah Aborsi","Pornografi Handal","Kodok Zuma","Richard Supir Lintas","Sate Usus","Semen Satu Sak","Hotman Paris","Pantat Vespa","Kodok Jawa","Pelecehan Ayam","Sange Brutal","Nasi KFC","Gay Hunter","Gibran Premium","Andy Pertalite","Certified Racist","Mabuk Pertamax", "Pemerkosa Avanza","Pengocok Kartu","Negro Professional","China Bangkrut","China Hitam","Cumi Hitam Madura","Tempe Goreng",
+            "Supir Lintas", "Dimas Ukin", "Jefry Kondom",
+            "Warung Jablay","Kadal Membolos",
+            "Patrick Sunda"
+        ];
+
+        function findKhodam() {
+            const userName = document.getElementById('userName').value.trim();
+            const resultElement = document.getElementById('result');
+
+            if (!userName) {
+                resultElement.textContent = "Masukkan nama Anda untuk menemukan Khodam!";
+                return;
+            }
+
+            // Pilih Khodam berdasarkan nama
+            const randomIndex = (userName.length + Math.random() * 100) % khodamList.length;
+            const khodamName = khodamList[Math.floor(randomIndex)];
+
+            // Tampilkan hasil
+            resultElement.textContent = `Khodam kamu adalah: ${khodamName} AWOKAKOWKOAWKOAWKO`;
+        }
+    </script>
+</body>
+</html>

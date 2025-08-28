@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(transparent, red);
+            border-radius: 6px;
+            transition: 0.15s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(transparent, rgb(255, 166, 2));
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Batasi hanya scroll horizontal */
+            overflow-y: visible; /* Izinkan scroll vertikal untuk elemen animasi */
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tarot-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px; /* Posisi kartu lebih ke bawah */
+            z-index: 1;
+            position: relative;
+        }
+
+        .tarot-card {
+            width: 260px; /* Perbesar kartu */
+            height: 460px; /* Perbesar kartu */
+            margin: 15px 0;
+            perspective: 1000px;
+        }
+
+        .tarot-card-inner {
+            position: relative;
+            width: 100%;
+            height: 90%;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 0.8s;
+        }
+
+        .tarot-card.flip .tarot-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .tarot-card-front, .tarot-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 2px solid white;
+            border-radius: 10px;
+        }
+
+        .tarot-card-front {
+            background: url('default-back.jpg') no-repeat center/cover; /* Ganti dengan gambar belakang kartu */
+        }
+
+        .tarot-card-back {
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            transform: rotateY(180deg);
+        }
+
+        .input-container {
+            position: relative;
+            top: 10%;
+            text-align: center;
+            z-index: 2; /* Pastikan berada di depan video */
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 36px;
+            color: #fff;
+        }
+        
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khodam</title>
+</head>
+<body>
+    <section class="videosection">
+        <div class="background-video">
+            <video autoplay muted loop>
+                <source src="Media/Ambient Scary Background Loop _ SFINX 2016.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+    <div class="input-container">
+        <h1>Gacha Kartu Tarot</h1>
+        <input type="text" id="nameInput" placeholder="Masukkan Nama Anda" />
+        <button onclick="gachaTarot()">Gacha</button>
+    </div>
+
+    <div class="tarot-container">
+        <div class="tarot-card" id="tarotCard">
+            <div class="tarot-card-inner">
+                <div class="tarot-card-front"></div>
+                <div class="tarot-card-back"></div>
+            </div>
+        </div>
+        <p id="tarotName" style="text-align: center; color: white; font-size: 20px;"></p>
+    </div>
+
+    <script>
+        const tarotCards = [
+            { name: "The Moment To Recuperate", image: "tarot/1.png" },
+            { name: "The Cold Blooded", image: "tarot/2.png" },
+            { name: "The Come Back Stronger", image: "tarot/3.png" },
+            { name: "The Eye For An Eye", image: "tarot/4.png" },
+            { name: "The Focus Fire", image: "tarot/5.png" },
+            { name: "The Fool Me Once", image: "tarot/6.png" },
+            { name: "The Friends For Life", image: "tarot/7.png" },
+            { name: "The Gunslinger's Choice", image: "tarot/8.png" },
+            { name: "The Hangman", image: "tarot/9.png" },
+            { name: "The Horseman", image: "tarot/10.png" },
+            { name: "The Hunker Down", image: "tarot/11.png" },
+            { name: "The Iron Lung", image: "tarot/12.png" },
+            { name: "The Kick In The Butt", image: "tarot/13.png" },
+            { name: "The Landon's Patience", image: "tarot/14.png" },
+            { name: "The Live For Fight", image: "tarot/15.png" },
+            { name: "The Necessity Breeds", image: "tarot/16.png" },
+            { name: "The Never Without One", image: "tarot/17.png" },
+            { name: "The Of Single Purpose", image: "tarot/18.png" },
+        ];
+
+        function gachaTarot() {
+            const name = document.getElementById('nameInput').value.trim();
+            const tarotCard = document.getElementById('tarotCard');
+            const tarotBack = document.querySelector('.tarot-card-back');
+            const tarotInner = document.querySelector('.tarot-card-inner');
+
+            if (!name) {
+                alert("Masukkan nama terlebih dahulu!");
+                return;
+            }
+
+            // Ambil kartu secara acak
+            const randomIndex = Math.floor(Math.random() * tarotCards.length);
+            const selectedCard = tarotCards[randomIndex];
+
+            // Update tampilan kartu belakang
+            tarotBack.style.backgroundImage = `url('${selectedCard.image}')`;
+            document.getElementById('tarotName').textContent = `${name}, kartumu adalah: ${selectedCard.name}`;
+
+            // Efek flip kartu
+            tarotCard.classList.remove('flip');
+            setTimeout(() => {
+                tarotCard.classList.add('flip');
+            }, 100); // Beri jeda agar flip terasa halus
+        }
+    </script>
+</body>
+</html>

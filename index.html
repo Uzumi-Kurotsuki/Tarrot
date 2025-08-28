@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .card {
+            background: #333;
+            border: 2px solid white;
+            border-radius: 10px;
+            width: 300px;
+            margin: 20px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin: 15px 0;
+        }
+
+        .card p {
+            font-size: 16px;
+            padding: 0 15px;
+        }
+
+        .card a {
+            display: block;
+            margin: 15px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .card a:hover {
+            background-color: white;
+            color: black;
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Navigation</title>
+</head>
+<body>
+    <section class="videosection">
+        <div class="background-video">
+            <video autoplay muted loop>
+                <source src="Media/Ambient Scary Background Loop _ SFINX 2016.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+    <h1 style="text-align: center; margin-top: 30px;">Jalan Sesat Mana ?</h1>
+
+    <div class="container">
+        <div class="card">
+            
+            <h3>Tarot</h3>
+            <p>Discover the mysteries of the Tarot and uncover your destiny.</p>
+            <a href="tarrot.html">CEK</a>
+        </div>
+
+        <div class="card">
+            
+            <h3>Khodam</h3>
+            <p>Learn about the power and mysteries of Khodam.</p>
+            <a href="khodam.html">CEK</a>
+        </div>
+
+        <div class="card">
+            
+            <h3>Kecocokan</h3>
+            <p>Explore the secret relations and bonds between anything.</p>
+            <a href="lovers.html">CEK</a>
+        </div>
+    </div>
+</body>
+</html>

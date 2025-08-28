@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ras Calculator</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin: 20px auto;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1.2rem;
+            margin: 10px;
+            width: calc(50% - 22px); /* Mengisi setengah layar dengan margin */
+            max-width: 300px; /* Batasan lebar */
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4757;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e84118;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="videosection">
+        <div class="background-video">
+            <video autoplay muted loop>
+                <source src="Media/" type="video/mp4">
+            </video>
+        </div>
+    </section>
+    <h1>Kecocokan Calculator</h1>
+    <div class="input-container">
+        <input type="text" id="name1" placeholder="Masukkan Nama Pertama" />
+        <input type="text" id="name2" placeholder="Masukkan Kata Yang Ingin di Cocokan" />
+        <button onclick="calculateLove()">Hitung</button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        function calculateLove() {
+            const name1 = document.getElementById('name1').value.trim();
+            const name2 = document.getElementById('name2').value.trim();
+            const resultElement = document.getElementById('result');
+
+            if (!name1 || !name2) {
+                resultElement.textContent = "Masukkan kedua nama untuk menghitung!";
+                return;
+            }
+
+            // Logika sederhana untuk menghitung persentase
+            const combinedNames = name1 + name2;
+            let loveScore = 0;
+
+            // Hitung nilai berdasarkan kode ASCII karakter dalam nama
+            for (let i = 0; i < combinedNames.length; i++) {
+                loveScore += combinedNames.charCodeAt(i);
+            }
+
+            // Kurangi hingga menghasilkan persentase
+            loveScore = loveScore % 101;
+
+            // Tampilkan hasil
+            resultElement.textContent = `Peluang Kesamaan antara ${name1} dan ${name2} adalah ${loveScore}%!`;
+        }
+    </script>
+</body>
+</html>
